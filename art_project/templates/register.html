@@ -1,0 +1,28 @@
+{% extends "user.html" %}
+{% block content %}
+<form action="">
+    <div class="from-group">
+        <label for="">帐号</label>
+        <input type="text" class="form-control">
+    </div>
+    <div class="from-group">
+            <label for="">密码</label>
+            <input type="text" class="form-control">
+    </div>
+    <div class="from-group">
+            <label for="">确认密码</label>
+            <input type="text" class="form-control">
+    </div>
+    <div class="from-group">
+            <label for="">验证码</label>
+            <input type="text" class="form-control">
+            <img src="holder.js/180x50" style="margin-top:8px" alt="">
+    </div>
+    <a href="/login">已有账户，前往登录</a>
+    <br>
+    <a class="btn btn-success" href="/login"> 注册 </a>
+</form>
+{% endblock %}
+{% block js%}
+<script src="{{ url_for('static', filename='js/holder.min.js') }}"></script>
+{% endblock %}
