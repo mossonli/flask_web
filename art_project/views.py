@@ -3,19 +3,22 @@
 __author__ = 'mosson'
 
 from flask import Flask, render_template, redirect
+from forms import LoginForm, RegisterForm, ArtForm
 app = Flask(__name__)
-
+app.config["SECRET_KEY"] = "we"
 
 #登录
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 
 #注册
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template("register.html", title="注册")
+    form = RegisterForm()
+    return render_template("register.html", title="注册", form=form)
 
 
 #退出
@@ -26,7 +29,8 @@ def logout():
 # 发布文章
 @app.route('/art/add', methods=["GET", "POST"])
 def art_add():
-    return render_template("art_add.html", title="添加文章")
+    form = ArtForm()
+    return render_template("art_add.html", title="添加文章", form=form)
 # 编辑文章
 @app.route('/art/edit/<int:id>', methods=["GET", "POST"])
 def art_edit(id):
