@@ -1,31 +1,50 @@
 {% extends "user.html" %}
 {% block content %}
-<form action="">
+<form action="" method="POST">
+    {% for msg in get_flashed_messages(category_filter=['err']) %}
+    <p style="color:red">{{msg}}</p>
+    {% endfor %}
+
     <div class="from-group">
         <label for="">帐号</label>
         <!-- <input type="text" class="form-control"> -->
         {{form.name}}
+        {%for v in form.name.errors%}
+        <p style="color:red">{{v}}</p>
+        {%endfor%}
     </div>
     <div class="from-group">
             <label for="">密码</label>
             <!-- <input type="text" class="form-control"> -->
             {{form.pwd}}
+            {%for v in form.pwd.errors%}
+            <p style="color:red">{{v}}</p>
+            {%endfor%}
     </div>
     <div class="from-group">
             <label for="">确认密码</label>
             <!-- <input type="text" class="form-control"> -->
             {{form.repwd}}
+            {%for v in form.repwd.errors%}
+            <p style="color:red">{{v}}</p>
+            {%endfor%}
     </div>
     <div class="from-group">
             <label for="">验证码</label>
             <!-- <input type="text" class="form-control"> -->
             {{form.code}}
+
             <img src="holder.js/180x50" style="margin-top:8px" alt="">
-    </div>
+            {%for v in form.code.errors%}
+            <p style="color:red">{{v}}</p>
+            {%endfor%}
+        </div>
     <a href="/login">已有账户，前往登录</a>
     <br>
     {{form.submit}}
+    {{form.csrf_token}}
     <!-- <a class="btn btn-success" href="/login"> 注册 </a> -->
+
 </form>
 {% endblock %}
 {% block js%}

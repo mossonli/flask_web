@@ -28,7 +28,7 @@ create table if not exists art(
     cate tinyint unsigned not null comment "标题",
     user_id tinyint unsigned not null comment "作者id",
     logo varchar(100) not null comment "封面",
-    content Text not null comment "内容"
+    content Text not null comment "内容",
     addtime int  default 0 not null comment "注册时间"
 )engine=InnoDB default charset=utf8 comment "文章";
 

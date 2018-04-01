@@ -2,13 +2,13 @@
 # -*- coding:utf-8 -*-
 __author__ = 'mosson'
 from flask import Flask
-from flask_sqlalchemy import SQLALCHEMY
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_UIL"] = "mysql+pymysql://root:lilu136782643@58.87.88.120:3306/artcrms"
+app.config["SQLALCHEMY_DATABASE_UIL"] = "mysql+pymysql://root:123456@47.104.70.170:3306/artcms"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-db = SQLALCHEMY(app)
+db = SQLAlchemy(app)
 
 
 class User(db.Model):
