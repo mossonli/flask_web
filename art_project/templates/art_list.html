@@ -1,4 +1,5 @@
 {% extends "layout.html" %} 
+{% import "page.html" as pg %}
 {% block css %}
 <style>
     .table td, .table th{vertical-align:middle}
@@ -18,35 +19,25 @@
         </tr>
     </thead>
     <tbody>
-        {% for i in range(1, 11) %}
+        {% for i in page_data.items %}
         <tr>
-            <td>爱学习</td>
-            <td>科学学习</td>
+            <td>{{i.title}}</td>
+            <td>{{cate[i.cate-1][1]}}</td>
             <td>
-                <img src="holder.js/75x40" alt="">
+                <!-- <img src="holder.js/75x40" alt=""> -->
+                <img src="/static/uploads/{{i.logo}}" style="width:75px; height:40px" alt="">
             </td>
-            <td>mosson</td>
-            <td>2018-03-10 15:35:00</td>
+            <td>{{session["user"]}}</td>
+            <td>{{i.addtime}}</td>
             <td>
-                <button class="btn btn-sm btn-outline-warning">编辑</button>
-                <button class="btn btn-sm btn-outline-danger">删除</button>
+                <a href="{{ url_for('art_edit', id=i.id) }}" class="btn btn-sm btn-outline-warning">编辑</a>
+                <a href="{{url_for('art_del', id=i.id)}}" class="btn btn-sm btn-outline-danger">删除</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
-
 </table>
-<nav>
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="">上一页</a></li>
-        <li class="page-item"><a class="page-link" href="">1</a></li>
-        <li class="page-item"><a class="page-link" href="">2</a></li>
-        <li class="page-item"><a class="page-link" href="">3</a></li>
-        <li class="page-item"><a class="page-link" href="">4</a></li>
-        <li class="page-item"><a class="page-link" href="">5</a></li>
-        <li class="page-item"><a class="page-link" href="">下一页</a></li>
-    </ul>
-</nav>
+{{pg.page(page_data, "art_list")}}
 {% endblock %}
 {% block js %}
 <script src="{{ url_for('static', filename='js/holder.min.js') }}"></script>

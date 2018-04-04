@@ -1,0 +1,29 @@
+{% macro page(data, url) %}
+{% if data %}<!-- 有数据才显示分页的内容  -->
+<nav>
+    <ul class="pagination">
+        {% if data.has_prev %} <!-- 有上一页  -->
+        <li class="page-item"><a class="page-link" href="{{url_for(url, page=data.prev_num)}}">上一页</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="">上一页</a></li>
+        {% endif %}
+
+        {% for i in data.iter_pages() %} <!-- 中间的页码 -->
+            {% if i %}
+                {% if i != data.page %} <!-- 页码不等于当前页 -->
+                <li class="page-item"><a class="page-link" href="{{url_for(url, page=i)}}">{{i}}</a></li>
+                {% else %}<!-- 页码等于当前页  显示激活的样式 -->
+                <li class="page-item active"><a class="page-link"  href="{{url_for(url, page=i)}}"></a>{{i}}</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if data.has_next %} <!-- 有下一页  -->
+        <li class="page-item"><a class="page-link" href="{{url_for(url, page=data.next_num)}}">下一页</a></li>
+        {% else %}
+        <li class="page-item disabled"><a class="page-link" href="">下一页</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endmacro %}
